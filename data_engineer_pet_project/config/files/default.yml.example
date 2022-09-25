@@ -1,0 +1,9 @@
+hdfs:
+  host_url: ""
+  bike_core_path: ""
+  user: ""
+spark:
+  spark.driver.memory: 2g
+datasets:
+  citibike_bucket_name: "tripdata"
+  citibike_local_core_path: ""

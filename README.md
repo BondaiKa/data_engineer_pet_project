@@ -52,14 +52,14 @@ experience in the Data and Software Engineering field as well as see how you app
 
 #### Data Engineer Pet Project
 
-|  Project Name   | **Data Engineer Pet Project**                     |
-|-----|---------------------------------------------------|
-|   Category  | Pet project                                       |
-|  Description   |  project of processing and analyzing 2 datasets |
-|  Tech stack   | #TODO                                             |
-|  Office   | None                                              |
-|  Status   | In progress                                       |
-|  ETA   | 30.09.2022                                        |
+|  Project Name   | **Data Engineer Pet Project**                  |
+|-----|------------------------------------------------|
+|   Category  | Pet project                                    |
+|  Description   | project of processing and analyzing 2 datasets |
+|  Tech stack   | Hadoop HDFS, PySpark                           |
+|  Office   | None                                           |
+|  Status   | In progress                                    |
+|  ETA   | 30.09.2022                                     |
 
 #### Team
 
@@ -71,16 +71,17 @@ experience in the Data and Software Engineering field as well as see how you app
 
 1. write plan to develop app (plan + architecture) - **2h**
 2. find, download, peek on datasets - **2h**
-3. upload to db/hdfs locally if resources are available - **1h**
-4. setup environment, logging, `basement` of application etc - **4h**
-5. implement cleansing logic (date format etc...) - **4h**
-6. join 2 datasets using PySpark or another technologies - **3h**
-7. find anomalies, dependencies, statistics and other things - **5h**
-8. implement unit tests - **3h**
+3. setup hadoop/yarn/spark locally on laptop - **2h**
+4. upload to db/hdfs locally if resources are available - **3h**
+5. setup environment, logging, `basement` of application etc - **4h**
+6. implement cleansing logic (date format etc...) - **4h**
+7. join 2 datasets using PySpark or another technologies - **3h**
+8. find anomalies, dependencies, statistics and other things - **5h**
+9. implement unit tests - **3h**
 
 #### Report
 
-Time estimate - **24h**
+Time estimate - **28h**
 Actual time spent - #TODO
 
 ## Implementation
