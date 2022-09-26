@@ -9,19 +9,18 @@ from data_engineer_pet_project.jobs.session import Session
 
 
 class BikeDatasetLandingJob(BaseJob):
+    """Clean and convert bike dataset to parquet"""
 
-    def _get_landing_bike_dataset_raw_paths(self, date: datetime) -> str:
+    def get_landing_bike_dataset_raw_paths(self, date: datetime) -> str:
         filename = f"{date.year}{date.month:02d}-{BIKE_DATASET_FILE_PATTERN}{BIKE_DATASET_CSV_FILE_EXTENSION}"
-        #TODO: fix config var
-        return f"hdfs://localhost:9000" + str(Config().get_hdfs_bike_core_path / 'landing' / filename)
+        return Config().get_hdfs_url + str(Config().get_hdfs_bike_core_path / 'landing' / filename)
 
     def _get_dataset_paths(self, date: datetime) -> str:
-        return self._get_landing_bike_dataset_raw_paths(date=date)
+        return self.get_landing_bike_dataset_raw_paths(date=date)
 
-    def _get_landing_bike_dataset_parquet_paths(self, date: datetime) -> str:
+    def get_landing_bike_dataset_parquet_paths(self, date: datetime) -> str:
         filename = f"{date.year}{date.month:02d}-{BIKE_DATASET_FILE_PATTERN}{BIKE_DATASET_PARQUET_FILE_EXTENSION}"
-        # TODO: fix config var
-        return f"hdfs://localhost:9000" + str(Config().get_hdfs_bike_core_path / 'landing' / filename)
+        return Config().get_hdfs_url + str(Config().get_hdfs_bike_core_path / 'landing' / filename)
 
     def extract(self, date: datetime) -> DataFrame:
         return self.filter_df(dataset=Session().load_csv_file(paths=[str(self._get_dataset_paths(date))], header=True))
@@ -33,7 +32,7 @@ class BikeDatasetLandingJob(BaseJob):
         return dataset
 
     def save(self, df: DataFrame, date: datetime):
-        df.repartition(1).write.mode('overwrite').parquet(self._get_landing_bike_dataset_parquet_paths(date))
+        df.repartition(1).write.mode('overwrite').parquet(self.get_landing_bike_dataset_parquet_paths(date))
 
 
 if __name__ == '__main__':

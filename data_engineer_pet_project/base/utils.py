@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class MetaSingleton(type):
     """Metaclass for create singleton"""
 
@@ -13,3 +16,12 @@ BIKE_DATASET_FILE_PATTERN = "citibike-tripdata"
 BIKE_DATASET_CSV_FILE_EXTENSION = '.csv'
 BIKE_DATASET_PARQUET_FILE_EXTENSION = '.parquet'
 BIKE_DATASET_ZIP_FILE_EXTENSION = f'{BIKE_DATASET_CSV_FILE_EXTENSION}.zip'
+
+
+def get_weather_dataset_file_path(start_date: datetime, end_date: datetime):
+    """Get weather file name"""
+    return f"new_york_{start_date.year}-{start_date.month:02d}-{start_date.day:02d}_to_{end_date.year}-{end_date.month:02d}-{end_date.day:02d}"
+
+
+def get_bike_weather_dataset_file_path(date: datetime):
+    return f"{date.year}{date.month}_new_york_bike_weather"
