@@ -41,3 +41,7 @@ class Config(metaclass=MetaSingleton):
     @property
     def get_hadoop_user(self) -> str:
         return self.hdfs.get('user')
+
+    @property
+    def get_hdfs_bike_weather_core_path(self) -> Path:
+        return Path(self.hdfs.get("bike_weather_path"))

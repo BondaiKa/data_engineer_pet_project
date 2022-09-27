@@ -10,7 +10,7 @@ class NewCitibikeOriginalSchema:
     start_lat = 'start_lat'
     start_lng = 'start_lng'
     end_lat = 'end_lat'
-    end_lng = 'member_casual'
+    end_lng = 'end_lng'
     member_casual = 'member_casual'
 
 

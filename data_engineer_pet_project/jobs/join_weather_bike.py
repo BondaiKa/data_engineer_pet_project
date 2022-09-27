@@ -4,6 +4,7 @@ from typing import Tuple
 from pyspark.sql import DataFrame
 
 from data_engineer_pet_project.base.utils import get_bike_weather_dataset_file_path
+from data_engineer_pet_project.config import Config
 from data_engineer_pet_project.jobs import BaseJob
 from data_engineer_pet_project.jobs.load_bike_dataset_to_hdfs import BikeDatasetLandingJob
 from data_engineer_pet_project.jobs.load_weather_to_hdfs import WeatherDatasetLandingJob
@@ -31,7 +32,8 @@ class JoinedWeatherBikeJob(BaseJob):
         return weather_df, bike_df
 
     def get_staging_joined_dataset_parquet_paths(self, date: datetime):
-        return f"{get_bike_weather_dataset_file_path(date=date)}.parquet"
+        filename = f"{get_bike_weather_dataset_file_path(date=date)}.parquet"
+        return Config().get_hdfs_url + str(Config().get_hdfs_bike_weather_core_path / "staging" / filename)
 
     def transform(self, weather_df: DataFrame, bike_df: DataFrame, *args, **kwargs) -> DataFrame:
         return join_weather_bike_datasets_job(
