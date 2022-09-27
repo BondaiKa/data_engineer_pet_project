@@ -25,3 +25,7 @@ def get_weather_dataset_file_path(start_date: datetime, end_date: datetime):
 
 def get_bike_weather_dataset_file_path(date: datetime):
     return f"{date.year}{date.month:02d}_new_york_bike_weather"
+
+
+def get_bike_weather_temperature_report_file_path(date: datetime):
+    return f"{date.year}{date.month:02d}_temperature_dependency_bike_weather"

@@ -87,3 +87,8 @@ Actual time spent - #TODO
 ## Implementation
 
 (with my comments/reflections)
+
+### Analysis
+
+Dependency between bike trip and temperature
+![tempeate dependency](static/temperature.png)
