@@ -82,7 +82,7 @@ experience in the Data and Software Engineering field as well as see how you app
 #### Report
 
 Time estimate - **28h**
-Actual time spent - #TODO
+Actual time spent - **35h**
 
 ## Implementation
 
@@ -100,17 +100,37 @@ The structure of datalake storage consists of several `stages`.
     ```
 2. Install packages locally or use virtualenv
    ```schell
-   pip install -r requirements.txt
+       pip install -r requirements.txt
+   ``` 
+3. Load datasets locally with setting date ("your date **YYYY-mm-dd** format")
+    - Citibike
+   ```shell
+      python3 data-engineer-pet-project-cli.py load-citibike-dataset-locally-cli --date "2022-04-30"
    ```
-3. To run whole pipeline use command below:
-    #TODO: implement
+    - Weather just download from [weather dataset link](https://www.visualcrossing.com/weather/weather-data-services)
+4. Put data from local to hdfs as example below:
+    ```shell
+        hdfs dfs -put /Volumes/Samsung_T5/datasets/citibike/202204-citibike-tripdata.csv /user/karim/citibike/landing
+    ```
+5. After you can run whole pipeline use command below:
     ```shell
         bash scripts/run-all.sh
     ```
-4. To run particular command use data-engineer-pet-project-cli.py as example below:
+6. To run particular command use data-engineer-pet-project-cli.py as example below:
     ```shell
         python3 data-engineer-pet-project-cli.py  load-citibike-dataset-locally-cli --date "2022-04-30"
     ```
+7. You can use jupyter notebook and google colab to analyze final reports...
+
+### History
+
+- Firstly, I tried to download citibike dataset directly to hdfs, however I didn't fix problem with hadoop settings. The
+  hadoop rejected requests like ```ConnectionError or Connection reset by peer``` So I skip this steps and load from
+  local store to hdfs manually using hdfs dfs command.
+- The dataset of each source could be separate n ot only for stages (`landing` `staging` `report`) but also for
+  year/month. The path could be like `hdfs://localhost:9000/user/karim/weather/2022/04/file-name.parquet`
+  and read multiple csv/parquet files.
+- Optimize join query if I didn't do that (remove redundant `groupby` days)
 
 ### Analysis
 
