@@ -3,7 +3,7 @@ from datetime import datetime
 
 import click
 
-from data_engineer_pet_project.jobs.join_weather_bike import JoinedWeatherBikeJob
+from data_engineer_pet_project.jobs.join_citibike_weather_datasets import JoinedWeatherBikeJob
 
 log = logging.getLogger(__name__)
 

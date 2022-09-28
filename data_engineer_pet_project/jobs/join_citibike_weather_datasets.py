@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 from typing import Tuple
 
@@ -14,6 +15,8 @@ from data_engineer_pet_project.schema.weather import WeatherVisualCrossingShortS
 from data_engineer_pet_project.transformers.citibike import get_bike_required_fields
 from data_engineer_pet_project.transformers.join_bike_weather_datasets import join_weather_bike_datasets_job
 from data_engineer_pet_project.transformers.weather import get_weather_required_fields
+
+log = logging.getLogger(__name__)
 
 
 class JoinedWeatherBikeJob(BaseJob):
@@ -67,6 +70,9 @@ class JoinedWeatherBikeJob(BaseJob):
         return dataset
 
     def run(self, date: datetime):
+        log.info(f'Start to extract data for {date}...')
         weather_df, bike_df = self.extract(date)
+
+        log.info(f'Start to join citibike and weather dataframes for {date}...')
         df = self.transform(weather_df=weather_df, bike_df=bike_df)
         self.save(df, date)
