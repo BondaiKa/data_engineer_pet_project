@@ -86,6 +86,10 @@ Actual time spent - #TODO
 
 ## Implementation
 
+The structure of datalake storage consists of several `stages`.
+
+![datalake_schema](static/datalake.jpg)
+
 (with my comments/reflections)
 
 ### Installation
