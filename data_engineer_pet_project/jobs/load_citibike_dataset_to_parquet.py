@@ -12,13 +12,13 @@ from data_engineer_pet_project.jobs.session import Session
 class BikeDatasetLandingJob(BaseJob):
     """Clean and convert bike dataset to parquet"""
 
-    def get_landing_bike_dataset_raw_paths(self, date: datetime) -> str:
+    def get_landing_bike_dataset_csv_paths(self, date: datetime) -> str:
         filename = f"{date.year}{date.month:02d}-{BIKE_DATASET_FILE_PATTERN}{BIKE_DATASET_CSV_FILE_EXTENSION}"
         return Config().get_hdfs_url + str(
             Config().get_hdfs_dataset_core_path / 'landing' / Config().get_hdfs_bike_dataset_name / filename)
 
     def _get_dataset_paths(self, date: datetime) -> str:
-        return self.get_landing_bike_dataset_raw_paths(date=date)
+        return self.get_landing_bike_dataset_csv_paths(date=date)
 
     def get_landing_bike_dataset_parquet_paths(self, date: datetime) -> str:
         filename = f"{date.year}{date.month:02d}-{BIKE_DATASET_FILE_PATTERN}{BIKE_DATASET_PARQUET_FILE_EXTENSION}"

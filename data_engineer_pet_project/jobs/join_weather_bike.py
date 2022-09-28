@@ -70,8 +70,3 @@ class JoinedWeatherBikeJob(BaseJob):
         weather_df, bike_df = self.extract(date)
         df = self.transform(weather_df=weather_df, bike_df=bike_df)
         self.save(df, date)
-
-
-if __name__ == '__main__':
-    job = JoinedWeatherBikeJob()
-    job.run(date=datetime(year=2022, month=4, day=1))

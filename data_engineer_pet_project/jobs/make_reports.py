@@ -37,8 +37,3 @@ class BikeTripTemperatureDependencyJob(BaseJob):
         df.repartition(1).write.mode('overwrite').csv(self.get_bike_weather_temperature_report_path(date),
                                                       header=True,
                                                       sep=',')
-
-
-if __name__ == '__main__':
-    job = BikeTripTemperatureDependencyJob()
-    job.run(date=datetime(year=2022, month=4, day=1))
