@@ -31,12 +31,12 @@ class Config(metaclass=MetaSingleton):
         return f"hdfs://{self.hdfs.get('ip_address')}:{self.hdfs.get('port')}"
 
     @property
-    def get_hdfs_bike_core_path(self) -> Path:
-        return Path(self.hdfs.get("bike_core_path"))
+    def get_hdfs_bike_dataset_name(self) -> Path:
+        return Path(self.hdfs.get("bike_dataset_name"))
 
     @property
-    def get_hdfs_weather_core_path(self) -> Path:
-        return Path(self.hdfs.get("weather_core_path"))
+    def get_hdfs_weather_dataset_name(self) -> Path:
+        return Path(self.hdfs.get("weather_dataset_name"))
 
     @property
     def get_hadoop_user(self) -> str:
@@ -48,4 +48,4 @@ class Config(metaclass=MetaSingleton):
 
     @property
     def get_hdfs_dataset_core_path(self) -> Path:
-        return Path(self.hdfs.get("get_hdfs_dataset_core_path"))
+        return Path(self.hdfs.get("hdfs_dataset_core_path"))

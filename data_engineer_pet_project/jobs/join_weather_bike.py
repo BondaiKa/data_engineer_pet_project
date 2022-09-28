@@ -6,8 +6,8 @@ from pyspark.sql import DataFrame
 from data_engineer_pet_project.base.utils import get_bike_weather_dataset_file_path
 from data_engineer_pet_project.config import Config
 from data_engineer_pet_project.jobs import BaseJob
-from data_engineer_pet_project.jobs.load_bike_dataset_to_hdfs import BikeDatasetLandingJob
-from data_engineer_pet_project.jobs.load_weather_to_hdfs import WeatherDatasetLandingJob
+from data_engineer_pet_project.jobs.load_citibike_dataset_to_parquet import BikeDatasetLandingJob
+from data_engineer_pet_project.jobs.load_weather_to_parquet import WeatherDatasetLandingJob
 from data_engineer_pet_project.jobs.session import Session
 from data_engineer_pet_project.schema.citibike import NewCitibikeShortSchema
 from data_engineer_pet_project.schema.weather import WeatherVisualCrossingShortSchema

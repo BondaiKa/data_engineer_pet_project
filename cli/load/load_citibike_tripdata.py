@@ -17,7 +17,7 @@ def cli():
 @cli.command()
 @click.option('--date', '-d', type=click.DateTime(), required=True)
 def load_citibike_dataset_locally_cli(date: datetime) -> None:
-    """Load citibike dataset cli command
+    """Load citibike dataset locally cli command
 
     :param date: last month date
     :return:
@@ -30,7 +30,7 @@ def load_citibike_dataset_locally_cli(date: datetime) -> None:
 @cli.command()
 @click.option('--date', '-d', type=click.DateTime(), required=True)
 def load_citibike_dataset_to_hdfs_cli(date: datetime) -> None:
-    """Load citibike dataset cli command
+    """Load citibike dataset to hdfs directly cli command
 
     :param date: last month date
     :return:
