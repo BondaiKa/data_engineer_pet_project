@@ -88,7 +88,28 @@ Actual time spent - #TODO
 
 (with my comments/reflections)
 
+### Installation
+
+1. load repository
+    ```shell
+        https://github.com/BondaiKa/image_denoising.git
+    ```
+2. Install packages locally or use virtualenv
+   ```schell
+   pip install -r requirements.txt
+   ```
+3. To run whole pipeline use command below:
+    #TODO: implement
+    ```shell
+        bash scripts/run-all.sh
+    ```
+4. To run particular command use data-engineer-pet-project-cli.py as example below:
+    ```shell
+        python3 data-engineer-pet-project-cli.py  load-citibike-dataset-locally-cli --date "2022-04-30"
+    ```
+
 ### Analysis
 
 Dependency between bike trip and temperature
 ![tempeate dependency](static/temperature.png)
+

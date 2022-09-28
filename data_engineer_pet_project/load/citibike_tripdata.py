@@ -17,7 +17,7 @@ def load_citibike_dataset_locally(date: datetime) -> None:
 
     Dataset: https://ride.citibikenyc.com/system-data
     """
-
+    log.info(f'Start to load citibike dataset from s3 bucket for {date:%Y-%m} locally...')
     s3 = boto3.client('s3', config=BotoConfig(signature_version=UNSIGNED))
     bucket = Config().get_bike_dataset_bucket_name
 
@@ -27,6 +27,8 @@ def load_citibike_dataset_locally(date: datetime) -> None:
     with open(full_path, 'wb') as f:
         s3.download_fileobj(bucket, filename, f)
 
+    log.info('Dataset has been downloaded...')
+
 
 def load_citibike_dataset_to_hdfs(date: datetime) -> None:
     """Load from s3 bucket to hdfs
@@ -35,7 +37,7 @@ def load_citibike_dataset_to_hdfs(date: datetime) -> None:
     Dataset: https://ride.citibikenyc.com/system-data
     """
     # TODO: @Karim fix hadoop hdfs configs.
-
+    log.info(f'Start to load citibike dataset from s3 bucket for {date:%Y-%m} to hdfs...')
     s3 = boto3.client('s3', config=BotoConfig(signature_version=UNSIGNED))
     bucket = Config().get_bike_dataset_bucket_name
     client_hdfs = InsecureClient(Config().get_hdfs_url, user=Config().get_hadoop_user)
@@ -45,6 +47,8 @@ def load_citibike_dataset_to_hdfs(date: datetime) -> None:
 
     with client_hdfs.write(hdfs_bike_core_path / filename) as writer:
         s3.download_fileobj(bucket, filename, writer)
+
+    log.info('Dataset has been downloaded...')
 
 
 if __name__ == '__main__':
