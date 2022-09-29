@@ -1,4 +1,5 @@
 class NewCitibikeOriginalSchema:
+    """New Citibike dataset schema"""
     ride_id = 'ride_id'
     rideable_type = 'rideable_type'
     started_at = 'started_at'
@@ -15,6 +16,7 @@ class NewCitibikeOriginalSchema:
 
 
 class NewCitibikeShortSchema:
+    """New Citibike dataset with necessary fields schema"""
     rideable_type = NewCitibikeOriginalSchema.rideable_type
     started_at = NewCitibikeOriginalSchema.started_at
     ended_at = NewCitibikeOriginalSchema.ended_at

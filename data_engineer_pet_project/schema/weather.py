@@ -1,4 +1,5 @@
 class WeatherVisualCrossingOriginSchema:
+    """Original weather dataset schema"""
     name = 'name'
     datetime = 'datetime'
     temp = 'temp'
@@ -25,6 +26,7 @@ class WeatherVisualCrossingOriginSchema:
 
 
 class WeatherVisualCrossingShortSchema:
+    """Weather dataset schema with necessary fields"""
     name = WeatherVisualCrossingOriginSchema.name
     datetime = WeatherVisualCrossingOriginSchema.datetime
     temp = WeatherVisualCrossingOriginSchema.temp

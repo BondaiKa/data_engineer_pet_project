@@ -15,7 +15,8 @@ def get_weather_required_fields(df: DataFrame, name: str, datetime_col: str,
     :param wind_speed: wind speed
     :return: desired weather dataframe
     """
-    return df.select(f.col(name), f.to_timestamp(f.col(datetime_col), format="yyyy-MM-dd'T'HH:mm:ss").alias(datetime_col),
+    return df.select(f.col(name),
+                     f.to_timestamp(f.col(datetime_col), format="yyyy-MM-dd'T'HH:mm:ss").alias(datetime_col),
                      f.col(temperature).cast("double"),
                      f.col(precipitation).cast("double"), f.col(snow).cast("int"),
                      f.col(wind_speed).cast("double"))

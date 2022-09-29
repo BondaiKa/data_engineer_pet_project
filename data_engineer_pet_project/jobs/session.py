@@ -28,5 +28,4 @@ class Session(metaclass=MetaSingleton):
 
     def load_csv_file(self, paths: Union[List[str], str], **options) -> SparkDataFrame:
         """Return dataframe from path with given options."""
-        # TODO: fix filepath to list of files (period)
         return self.spark_session.read.csv(paths, **options)

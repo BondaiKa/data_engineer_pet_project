@@ -9,6 +9,8 @@ log = logging.getLogger(__name__)
 
 
 class Config(metaclass=MetaSingleton):
+    """Configuration class that read configs from a yml file"""
+
     def __init__(self, cfg=None):
         self._cfg: Dict[str, Any] = cfg if cfg else YmlConfigReader().read()
         self.datasets = self._cfg.get('datasets', dict())
