@@ -6,7 +6,7 @@ from botocore import UNSIGNED
 from botocore.client import Config as BotoConfig
 from hdfs import InsecureClient
 
-from data_engineer_pet_project.base.utils import BIKE_DATASET_FILE_PATTERN, BIKE_DATASET_ZIP_FILE_EXTENSION
+from data_engineer_pet_project.base.utils import BIKE_DATASET_FILE_PATTERN
 from data_engineer_pet_project.config import Config
 
 log = logging.getLogger(__name__)
@@ -21,7 +21,7 @@ def load_citibike_dataset_locally(date: datetime) -> None:
     s3 = boto3.client('s3', config=BotoConfig(signature_version=UNSIGNED))
     bucket = Config().get_bike_dataset_bucket_name
 
-    filename = f"{date.year}{date.month:02d}-{BIKE_DATASET_FILE_PATTERN}{BIKE_DATASET_ZIP_FILE_EXTENSION}"
+    filename = f"{date.year}{date.month:02d}-{BIKE_DATASET_FILE_PATTERN}.csv.zip"
     full_path = Config().get_bike_dataset_local_core_path / filename
 
     with open(full_path, 'wb') as f:

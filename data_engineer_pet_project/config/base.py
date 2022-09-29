@@ -43,8 +43,8 @@ class Config(metaclass=MetaSingleton):
         return self.hdfs.get('user')
 
     @property
-    def get_hdfs_bike_weather_core_path(self) -> Path:
-        return Path(self.hdfs.get("bike_weather_path"))
+    def get_hdfs_bike_weather_dataset_name(self) -> Path:
+        return Path(self.hdfs.get("bike_weather_dataset_name"))
 
     @property
     def get_hdfs_dataset_core_path(self) -> Path:

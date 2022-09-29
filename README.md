@@ -120,7 +120,11 @@ The structure of datalake storage consists of several `stages`.
     ```shell
         python3 data-engineer-pet-project-cli.py  load-citibike-dataset-locally-cli --date "2022-04-30"
     ```
-7. You can use jupyter notebook and google colab to analyze final reports...
+7. To get reports you should write as example below:
+    ```shell
+        hadoop fs -copyToLocal /user/karim/public/bike_weather/202204_temperature_dependency_bike_weather.csv .
+    ```
+8. You can use jupyter notebook and google colab to analyze final reports...
 
 ### History
 

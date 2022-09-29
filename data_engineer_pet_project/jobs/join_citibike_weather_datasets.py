@@ -4,11 +4,8 @@ from typing import Tuple
 
 from pyspark.sql import DataFrame
 
-from data_engineer_pet_project.base.utils import get_bike_weather_dataset_file_path
-from data_engineer_pet_project.config import Config
+from data_engineer_pet_project.datalake.staging import BaseStagingArea
 from data_engineer_pet_project.jobs import BaseJob
-from data_engineer_pet_project.jobs.load_citibike_dataset_to_parquet import BikeDatasetLandingJob
-from data_engineer_pet_project.jobs.load_weather_to_parquet import WeatherDatasetLandingJob
 from data_engineer_pet_project.jobs.session import Session
 from data_engineer_pet_project.schema.citibike import NewCitibikeShortSchema
 from data_engineer_pet_project.schema.weather import WeatherVisualCrossingShortSchema
@@ -21,22 +18,23 @@ log = logging.getLogger(__name__)
 
 class JoinedWeatherBikeJob(BaseJob):
     """Join and save weather bike dataset"""
+    area = BaseStagingArea()
 
-    def get_weather_dataset_paths(self, date: datetime) -> str:
-        return WeatherDatasetLandingJob().get_landing_weather_dataset_parquet_paths(date=date)
-
-    def get_bike_dataset_paths(self, date: datetime) -> str:
-        return BikeDatasetLandingJob().get_landing_bike_dataset_parquet_paths(date=date)
+    # def get_weather_dataset_paths(self, date: datetime) -> str:
+    #     return WeatherDatasetLandingJob().get_landing_weather_dataset_parquet_paths(date=date)
+    #
+    # def get_bike_dataset_paths(self, date: datetime) -> str:
+    #     return BikeDatasetLandingJob().get_landing_bike_dataset_parquet_paths(date=date)
 
     def extract(self, date: datetime) -> Tuple[DataFrame, DataFrame]:
         """Load dataset"""
-        weather_df = self.filter_df(Session().load_dataframe(paths=self.get_weather_dataset_paths(date)))
-        bike_df = self.filter_df(Session().load_dataframe(paths=self.get_bike_dataset_paths(date)))
+        weather_df = self.filter_df(Session().load_dataframe(paths=self.area.get_landing_weather_dataset_paths(date)))
+        bike_df = self.filter_df(Session().load_dataframe(paths=self.area.get_landing_bike_dataset_paths(date)))
         return weather_df, bike_df
 
-    def get_staging_joined_dataset_parquet_paths(self, date: datetime):
-        filename = f"{get_bike_weather_dataset_file_path(date=date)}.parquet"
-        return Config().get_hdfs_url + str(Config().get_hdfs_bike_weather_core_path / "staging" / filename)
+    # def get_staging_joined_dataset_parquet_paths(self, date: datetime):
+    #     filename = f"{get_bike_weather_dataset_file_path(date=date)}.parquet"
+    #     return Config().get_hdfs_url + str(Config().get_hdfs_bike_weather_dataset_name / "staging" / filename)
 
     def transform(self, weather_df: DataFrame, bike_df: DataFrame, *args, **kwargs) -> DataFrame:
         return join_weather_bike_datasets_job(
@@ -64,7 +62,8 @@ class JoinedWeatherBikeJob(BaseJob):
         )
 
     def save(self, df: DataFrame, date: datetime, *args, **kwargs):
-        df.repartition(1).write.mode('overwrite').parquet(self.get_staging_joined_dataset_parquet_paths(date=date))
+        for path in self.area.get_staging_joined_dataset_parquet_paths(date=date):
+            df.repartition(1).write.mode('overwrite').parquet(path)
 
     def filter_df(self, dataset: DataFrame) -> DataFrame:
         return dataset

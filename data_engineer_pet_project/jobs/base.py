@@ -4,6 +4,7 @@ from datetime import datetime
 
 from pyspark.sql import DataFrame
 
+from data_engineer_pet_project.datalake.base import BaseDataLakeArea
 from data_engineer_pet_project.jobs.session import Session
 
 log = logging.getLogger(__name__)
@@ -11,6 +12,7 @@ log = logging.getLogger(__name__)
 
 class BaseJob(metaclass=ABCMeta):
     """Base dataset job worker"""
+    area: BaseDataLakeArea
 
     def extract(self, date: datetime) -> DataFrame:
         """Load dataset"""
@@ -27,7 +29,7 @@ class BaseJob(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def save(self, df: DataFrame, *args, **kwargs):
+    def save(self, df: DataFrame, date: datetime, *args, **kwargs):
         """Save results"""
         raise NotImplementedError
 
