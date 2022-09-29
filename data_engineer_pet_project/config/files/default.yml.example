@@ -1,6 +1,10 @@
 hdfs:
-  host_url: ""
-  bike_core_path: ""
+  ip_address: "localhost"
+  port: 9000
+  bike_dataset_name: "citibike"
+  weather_dataset_name: "weather"
+  bike_weather_dataset_name: "bike_weather"
+  hdfs_dataset_core_path: ""
   user: ""
 spark:
   spark.driver.memory: 2g
