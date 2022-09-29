@@ -58,7 +58,7 @@ experience in the Data and Software Engineering field as well as see how you app
 |  Description   | project of processing and analyzing 2 datasets |
 |  Tech stack   | Hadoop HDFS, PySpark                           |
 |  Office   | None                                           |
-|  Status   | In progress                                    |
+|  Status   | Done                                           |
 |  ETA   | 30.09.2022                                     |
 
 #### Team
@@ -96,7 +96,7 @@ The structure of datalake storage consists of several `stages`.
 
 1. load repository
     ```shell
-        https://github.com/BondaiKa/image_denoising.git
+        https://github.com/BondaiKa/data_engineer_pet_project
     ```
 2. Install packages locally or use virtualenv
    ```schell
@@ -131,10 +131,6 @@ The structure of datalake storage consists of several `stages`.
 - Firstly, I tried to download citibike dataset directly to hdfs, however I didn't fix problem with hadoop settings. The
   hadoop rejected requests like ```ConnectionError or Connection reset by peer``` So I skip this steps and load from
   local store to hdfs manually using hdfs dfs command.
-- The dataset of each source could be separate n ot only for stages (`landing` `staging` `report`) but also for
-  year/month. The path could be like `hdfs://localhost:9000/user/karim/weather/2022/04/file-name.parquet`
-  and read multiple csv/parquet files.
-- Optimize join query if I didn't do that (remove redundant `groupby` days)
 
 ### Analysis
 
