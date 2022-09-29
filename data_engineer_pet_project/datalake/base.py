@@ -1,4 +1,4 @@
-from abc import ABC, ABCMeta
+from abc import ABCMeta
 from pathlib import Path
 from typing import Iterable, List, Union
 
@@ -36,13 +36,3 @@ class BaseDataLakeArea(metaclass=ABCMeta):
                 self.add_base_hdfs_prefix(
                     self.add_container_area_prefix(
                         self.add_dataset_name_prefix(path, dataset_name=dataset_name)))) for path in paths]
-
-
-class BaseStagingArea(BaseDataLakeArea, ABC):
-    schemas = None
-    ...
-
-
-class BasePublicArea(BaseDataLakeArea, ABC):
-    schemas = None
-    ...
