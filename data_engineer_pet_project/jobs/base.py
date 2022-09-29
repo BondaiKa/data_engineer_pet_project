@@ -34,6 +34,7 @@ class BaseJob(metaclass=ABCMeta):
         raise NotImplementedError
 
     def run(self, date: datetime):
+        """run extracting, transforming and saving dataframe job"""
         log.info(f'Start to extract data for {date}...')
         df = self.extract(date)
 

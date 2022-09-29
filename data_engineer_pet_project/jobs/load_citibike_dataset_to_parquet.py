@@ -13,8 +13,10 @@ class BikeDatasetLandingJob(BaseJob):
 
     def extract(self, date: datetime) -> DataFrame:
         return self.filter_df(
-            dataset=Session().load_csv_file(paths=self.area.get_landing_bike_dataset_csv_paths(to_date=date),
-                                            header=True))
+            dataset=Session().load_csv_file(
+                paths=self.area.get_landing_bike_dataset_csv_paths(to_date=date),
+                header=True)
+        )
 
     def transform(self, df: DataFrame, *args, **kwargs) -> DataFrame:
         return df

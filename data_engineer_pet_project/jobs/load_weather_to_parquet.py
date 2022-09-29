@@ -8,16 +8,18 @@ from data_engineer_pet_project.jobs.session import Session
 
 
 class WeatherDatasetLandingJob(BaseJob):
-    area = BaseLandingArea()
     """Load and transform weather dataset to hdfs job
 
     dataset info: https://www.visualcrossing.com/weather/weather-data-services
     """
+    area = BaseLandingArea()
 
     def extract(self, date: datetime) -> DataFrame:
         return self.filter_df(
-            dataset=Session().load_csv_file(paths=self.area.get_landing_weather_dataset_csv_paths(date),
-                                            header=True))
+            dataset=Session().load_csv_file(
+                paths=self.area.get_landing_weather_dataset_csv_paths(date),
+                header=True)
+        )
 
     def transform(self, df: DataFrame, *args, **kwargs) -> DataFrame:
         return df

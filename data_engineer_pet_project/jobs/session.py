@@ -7,6 +7,7 @@ from data_engineer_pet_project.config import Config
 
 
 class Session(metaclass=MetaSingleton):
+    """Spark session handler"""
     def __init__(self, spark_session=None):
         self._ssc = spark_session
 
